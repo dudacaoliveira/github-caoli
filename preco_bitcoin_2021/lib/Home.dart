@@ -75,6 +75,7 @@ class _HomeState extends State<Home> {
               moedaBra = "${moeda.toString()}";
               resultadoDollar = " = ${valDollar.toString()}";
               moedaAmericana = "${moeda2.toString()}";
+              print("Teste git");
             }
             break;
         }
