@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
             print("Sem conexão!");
             break;
           case ConnectionState.waiting :
-            print("sdfsdf");
+            print("Aguardando conexão case 1");
             resultado = "Carregando...";
             moedaBra = "";
             resultadoDollar = "";
@@ -52,14 +52,14 @@ class _HomeState extends State<Home> {
             //CircularProgressIndicator();
             break;
           case ConnectionState.active :
-            print("sdfsdf");
+            print("Case 2 Conexão active");
             resultado = "Ativa...";
             moedaBra = "";
             resultadoDollar = "";
             moedaAmericana = "";
             break;
           case ConnectionState.done :
-            print("sdff");
+            print("Conexao Done");
             if(snapshot.hasError){
               resultado = "Erro ao carregar...";
               moedaBra = "";
@@ -173,7 +173,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Ethereum hoje",style:TextStyle(fontSize: 20,color: Color.fromARGB(255,218,165,32),fontWeight: FontWeight.bold)),
+                    Text("Ethereum hoje!",style:TextStyle(fontSize: 20,color: Color.fromARGB(255,218,165,32),fontWeight: FontWeight.bold)),
                     Text( moedaAmericana,style:TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.bold),),
                     Text(volume,style:TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.bold),),
                   ],
