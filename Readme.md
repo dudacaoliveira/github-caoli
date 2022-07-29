@@ -1,6 +1,5 @@
-Git Course<br>
-teste<br>
-teste ssh <br>
-testando ssh hoje<br>
-teste 10/12/2021
-teste 15/12
+
+Olá Me chamo Carlos Eduardo, tenho graduação em Sistemas para Internet pelo IFRS.<br>
+Aqui nesse espaço postarei alguns projetos que estou desenvolvendo em Flutter Mobile/Web/Desktop.
+<br>
+Aqui
