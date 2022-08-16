@@ -1,6 +1,6 @@
 # precobitcoin2021
 
-A new Flutter application.
+Aplicativo para verificar o preço do Bitcoin conectando com API externa.
 
 ## Getting Started
 
