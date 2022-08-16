@@ -1,6 +1,7 @@
 # splash
 
-A new Flutter application.
+Aplicativo criado para mostrar um exemplo de uma tela de abertura "Splash". 
+Na linguagem de programação Dart/Flutter
 
 ## Getting Started
 
