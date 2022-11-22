@@ -344,7 +344,7 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
     int contaPessoasAux = 0;
     int kmIaux;
     int kmFaux;
-    print("CHAMADO O MÉTODO addtodo2! linha 304 arquivo KmRodadeStepper");
+    print("CHAMADO O MÉTODO addtodo2! linha 347 do  arquivo KmRodadeStepper");
     setState((){
 
       Map<String,dynamic> novaTarefa = Map();
@@ -352,11 +352,11 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
       novaTarefa["kmFinal"] = _textEditingControllerFinal.text;
       novaTarefa["idRegistro"] = _idRegistro;
       novaTarefa["dataEditada"] = txtData;
-      novaTarefa["qtde"] = contaPessoas.length;
-      novaTarefa["lista"] = contaPessoas;
+      novaTarefa["qtde"] = listaPessoaGlobal.length;
+      novaTarefa["lista"] = listaPessoaGlobal;
       //_tarefas.add(novaTarefa);// adiciona o mapa newTodo na lista _todoList
       //_saveData();//método que escreve no arquivo
-      contaPessoasAux = contaPessoas.length;
+      contaPessoasAux = listaPessoaGlobal.length;
       kmIaux = int.parse(_textEditingControllerKmIni.text);
       kmFaux = int.parse(_textEditingControllerFinal.text);
       //verifica se a lista está vazia para gravar no banco
@@ -552,7 +552,9 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
                           listaLocalEspcGlobal.add(localEspObj);
                           print(listaLocalEspcGlobal);
                           Navigator.pop(context);
+                          contaPessoas = [];
                           _showModalBottomSheetAddLocEsp();
+
                         },
                       ),
                       CupertinoButton(
@@ -617,7 +619,7 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
                             style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green)),
                         onPressed: () {
                           print("lista PessoaGlobal limpa!");
-                          listaPessoaGlobal = [];//limpa lista global
+                          //listaPessoaGlobal = [];//limpa lista global
                           addNewLocalEsp();
                           Navigator.pop(context);
                         },
@@ -943,9 +945,12 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios),color: Colors.blue,onPressed: (){Navigator.pop(context);},),
-        backgroundColor: Colors.white,
-        title: Text("Cadastrar Km Rodado",style: TextStyle(color: Colors.blue),),
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,),onPressed: (){
+          FocusScope.of(context).unfocus();
+          Navigator.pop(context);
+          },),
+        //backgroundColor: Colors.white,
+        title: Text("Cadastrar Km Rodado",style: TextStyle(color: Colors.white),),
       ),
       body: Column(
         children:<Widget>[
@@ -1056,6 +1061,7 @@ class _KmRodadoStepperState extends State<KmRodadoStepper> {
                                       contaPessoas.add(pessoaObj);
                                       print(listaPessoaGlobal);// adiciona pessoas na lista para contar quantas pessoas foram adicionadas a km
                                       print("adicionado pessoa na lista");
+                                      print("Qtde de pessoas igual a ${listaPessoaGlobal.length}");
                                       _showModalBottomSheetAddPessoa(_textEditingControllerPessoa.text,contaPessoas);
                                       _textEditingControllerObs.clear();
                                       _textEditingControllerPessoa.clear();

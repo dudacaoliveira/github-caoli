@@ -1,3 +1,4 @@
+import 'package:discomedv1/Cores.dart';
 import 'package:discomedv1/Urls.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -519,7 +520,7 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
     Center(child:
     Padding(
         padding: EdgeInsets.only(top: 100),
-        child: Text("Lista Vazia!")));
+        child: Text("Lista Vazia!",style: TextStyle(color: corFonte),)));
   }
 
 
@@ -543,14 +544,14 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: corBckgScaffold,
         appBar: AppBar(
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.blue,),
+          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: corFontAppBar),
               onPressed: (){Navigator.pop(context);}
           ),
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.search),
+            IconButton(icon: Icon(Icons.search,color: corFontAppBar,),
                 onPressed: ()async{
                   await _carregaDespRecu("","","");
                   print("------------------- ${items.length}");
@@ -562,7 +563,7 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
                 }
             )
           ],
-          title: Text("Listar Despesas"),
+          title: Text("Listar Despesas",style: TextStyle(color: corFontAppBar),),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -580,10 +581,10 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
                   //---------------------------------------------------------BTN
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: RaisedButton(color: Colors.grey[100],child: Row(
+                    child: RaisedButton(color: Colors.lightBlueAccent,child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Aprovadas",style: TextStyle(color: Colors.lightBlueAccent))
+                        Text("Aprovadas",style: TextStyle(color: Colors.white))
                       ],
                     ),onPressed: (){
                       _carregaDespRecu("aprovado","sim","sim");
@@ -597,10 +598,10 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
                   //---------------------------------------------------------BTN
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: RaisedButton(color: Colors.grey[100],child: Row(
+                    child: RaisedButton(color: Colors.green,child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Pagas",style: TextStyle(color: Colors.green),)
+                        Text("Pagas",style: TextStyle(color: Colors.white),)
                       ],
                     ),onPressed: (){
                       _carregaDespRecu("pago", "sim" , "sim");
@@ -609,10 +610,10 @@ class _TelaListarDespAlertasState extends State<TelaListarDespAlertas> {
                   //---------------------------------------------------------BTN
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: RaisedButton(color: Colors.grey[100],child: Row(
+                    child: RaisedButton(color: Colors.deepOrange,child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Recusadas",style: TextStyle(color: Colors.deepOrange),)
+                        Text("Recusadas",style: TextStyle(color: Colors.white),)
                       ],
                     ),onPressed: (){
                       _carregaDespRecu("devolvido", "nao", "sim");

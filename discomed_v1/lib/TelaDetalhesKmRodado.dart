@@ -67,7 +67,9 @@ class _TelaDetalhesKmRodadoState extends State<TelaDetalhesKmRodado> {
                     Text(
                         "Despesa foi removida!"),
                   ),
+
                 );
+
               },
               child: Column(
                 children: <Widget>[
@@ -366,7 +368,7 @@ class _TelaDetalhesKmRodadoState extends State<TelaDetalhesKmRodado> {
                         padding: const EdgeInsets.all(1.0),
                         itemBuilder: (context, position) {
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Card(
                               color:Color.fromARGB(255,254, 249, 231),
                               child: Container(

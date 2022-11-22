@@ -44,7 +44,9 @@ class Conexao {
       "CREATE TABLE IF NOT EXISTS ofensorVistoria (id INTEGER PRIMARY KEY , ofensor VARCHAR);",
       "CREATE TABLE IF NOT EXISTS setorVistoria (id INTEGER PRIMARY KEY , setor VARCHAR);",
       "CREATE TABLE IF NOT EXISTS statusVistoria (id INTEGER PRIMARY KEY , status VARCHAR , sigla VARCHAR);",
-      "CREATE TABLE IF NOT EXISTS tipoVistoria (id INTEGER PRIMARY KEY , tipo VARCHAR);"
+      "CREATE TABLE IF NOT EXISTS tipoVistoria (id INTEGER PRIMARY KEY , tipo VARCHAR);",
+      "CREATE TABLE IF NOT EXISTS vistoria (id INTEGER PRIMARY KEY , vistoria VARCHAR);",
+      "CREATE TABLE IF NOT EXISTS objVistoria (id INTEGER PRIMARY KEY , tipo VARCHAR , nome VARCHAR , ofensor VARCHAR , descricao VARCHAR , resultado VARCHAR, FOREIGN KEY (id) REFERENCES vistoria (id));"
     ];
     for (String query in queryes) {
       await db.execute(query);
@@ -93,6 +95,30 @@ class Conexao {
     //db.close();
   }
 
+  Future listarVistoria() async {
+    Database db = await recuperarBanco();
+    String sql = "SELECT * FROM objVistoria";
+    List tipos = await db.rawQuery(sql);
+    //print da lista completa
+    print("Vistorias = " + tipos.toString());
+    //db.close();
+  }
+
+
+
+  salvarVistoria (String tipo ,String nome, String ofensor, String descricao, String resultado )async{
+    Database db = await recuperarBanco();
+    Map<String, dynamic> dados = {
+      "tipo" :tipo,
+      "nome" :nome,
+      "ofensor" :ofensor,
+      "descricao" :descricao,
+      "resultado" : resultado
+    };
+    int id = await db.insert("objVistoria", dados);
+    print("Salvo Vistoria com a id: $id");
+  }
+
   salvarTipoVistoria (int idTpo, String tipo )async{
     Database db = await recuperarBanco();
     Map<String, dynamic> dados = {
@@ -100,7 +126,7 @@ class Conexao {
       "tipo" : tipo
     };
     int id = await db.insert("tipoVistoria", dados);
-    print("Salvo com a id: $id");
+    print("Salvo Tipo Vistoria com a id: $id");
   }
 
   salvarStatusVistoria (int idStatus, String status, String sigla )async{
@@ -111,7 +137,7 @@ class Conexao {
       "sigla" : sigla
     };
     int id = await db.insert("statusVistoria", dados);
-    print("Salvo com a id: $id");
+    print("Salvo Status com a id: $id");
   }
 
   salvarSetorVistoria (int idSetor, String setor )async{
@@ -121,7 +147,7 @@ class Conexao {
       "setor" : setor
     };
     int id = await db.insert("setorVistoria", dados);
-    print("Salvo com a id: $id");
+    print("Salvo Setor com a id: $id");
   }
 
 
@@ -132,7 +158,7 @@ class Conexao {
       "ofensor" : ofensor
     };
     int id = await db.insert("ofensorVistoria", dados);
-    print("Salvo com a id: $id");
+    print("Salvo Ofensor com a id: $id");
   }
 
   Future limpaTabela() async {
@@ -288,9 +314,9 @@ class Conexao {
         item["UF"] = km['nomeUf'];
         itens.add(item);
         //print(itens[0]);
-        print("Id: " + km['idRegistro'].toString() + ", " + km['kmIni'].toString() + " " +
-            km['kmFinal'].toString() + ", " + km['qtde'].toString() + ", " +
-            km['dataEditada'] + ", Log:" + km['dataRegistro']);
+        print("IMPRIME dentro do método listarKmRodado" + "Id: " + km['idRegistro'].toString() + ", " + "Km Ini = "+ km['kmIni'].toString() + " ," +
+           "Km Final = " + km['kmFinal'].toString() + ", " + "Qtde Pessoas = " + km['qtde'].toString() + ", " +
+            "Data: "+ km['dataEditada'] + ", Log:" + km['dataRegistro']);
       }
     } else {
       print("A lista está vazia!!!!");
@@ -704,7 +730,42 @@ class Conexao {
     return result.toList();
   }
 
+  Future<List> BuscaTiposVist() async {
+    var dbClient = await recuperarBanco();
+    //var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.rawQuery(
+        "SELECT * FROM tipoVistoria");
+    return result.toList();
+  }
 
+  Future<List> BuscaStatusVist() async {
+    var dbClient = await recuperarBanco();
+    //var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.rawQuery(
+        "SELECT * FROM statusVistoria");
+    return result.toList();
+  }
+
+  Future<List> BuscaOfensorVist() async {
+    var dbClient = await recuperarBanco();
+    //var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.rawQuery(
+        "SELECT * FROM ofensorVistoria");
+    return result.toList();
+  }
+
+  Future<List> BuscaSetorVist() async {
+    var dbClient = await recuperarBanco();
+    //var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.rawQuery(
+        "SELECT * FROM setorVistoria");
+    return result.toList();
+  }
+
+  /*ofensorVistoria
+ setorVistoria
+  statusVistoria
+   tipoVistoria*/
 
 }//fim da ClasseConexão
 

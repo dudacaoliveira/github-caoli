@@ -448,6 +448,22 @@ class _TelaConfigState extends State<TelaConfig> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+
+            Padding(padding: EdgeInsets.all(10),
+              child: RaisedButton(
+                  color: Colors.pink,
+                  child: Text("Listar Vistorias",
+                      style: TextStyle(
+                          color: Colors.white
+                      )),
+                  onPressed: (){
+                    //listarLocaisEsp();
+                    Conexao con = Conexao();
+                    con.listarVistoria();
+
+                  }
+              ),
+            ),
             Padding(padding: EdgeInsets.only(top: 50,bottom: 10,left: 10,right: 10),
             child: RaisedButton(
                 color: Colors.amber,
@@ -498,7 +514,6 @@ class _TelaConfigState extends State<TelaConfig> {
                       )),
                   onPressed: (){
                     Conexao con = Conexao();
-
                     con.salvarTipoVistoria(1, "NICHOS");
                     con.salvarTipoVistoria(2, "CARROS");
                     con.salvarTipoVistoria(3, "TEMPERATURA");

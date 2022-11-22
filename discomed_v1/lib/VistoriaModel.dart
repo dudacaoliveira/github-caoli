@@ -1,11 +1,19 @@
 class VistoriaModel{
-    String _nome = "";
-    String _ofensor = "";
+    String _tipo = "";//tipo
+    String _nome = "";//setor
+    String _ofensor = "";//mesa,gaveta,alimento
     String _descricao = "";
     String _resultFinal = "";
 
 
     VistoriaModel();
+
+
+    String get tipo => _tipo;
+
+    set tipo(String value) {
+      _tipo = value;
+    }
 
     String get resultFinal => _resultFinal;
 
@@ -42,6 +50,7 @@ class VistoriaModel{
 
     Map<String, dynamic> toJson() {
       final Map<String, dynamic> data = new Map<String, dynamic>();
+      data['_tipo'] = this.tipo;
       data['_setor'] = this.nome;
       data['_ofensor'] = this.ofensor;
       data['_descricao'] = this.descricao;

@@ -1,5 +1,6 @@
-import 'package:discomedv1/Index.dart';
+import 'package:discomedv1/IndexOLD.dart';
 import 'package:discomedv1/KmRodadoStepper.dart';
+import 'package:discomedv1/ListaComprovantes.dart';
 import 'package:discomedv1/Menu.dart';
 import 'package:discomedv1/TelaAdicPessoas.dart';
 import 'package:discomedv1/TelaCidades.dart';
@@ -11,7 +12,8 @@ import 'package:discomedv1/TelaHistoticoKm.dart';
 import 'package:discomedv1/TelaListarDespAlertas.dart';
 import 'package:discomedv1/TelaListarTipos.dart';
 import 'package:discomedv1/TelaLugarEspecifico.dart';
-import 'package:discomedv1/TelaVistoria2.dart';
+import 'package:discomedv1/TelaVistoria.dart';
+import 'package:discomedv1/TelaVisuImgComp.dart';
 import 'package:discomedv1/comprovantes.dart';
 import 'package:discomedv1/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'NovoIndex.dart';
 import 'TelaCidadesPR.dart';
 import 'TelaCidadesRS.dart';
 import 'TelaHistoricoDespesas.dart';
@@ -37,7 +40,7 @@ void main() {
       GetPage(name: '/', page: () => SplashScreen()),
       GetPage(name: '/Login', page: () => TelaLoginNova()),
       GetPage(
-          name: '/index', page: () => Index(),
+          name: '/index', page: () => NovoIndex(),
           transition: Transition.leftToRight
       ),
       GetPage(
@@ -118,7 +121,15 @@ void main() {
           transition: Transition.fade
       ),
       GetPage(
-          name: '/telavistoria2', page: () => TelaVistoria2(),
+          name: '/telavistoria', page: () => TelaVistoria(),
+          transition: Transition.fade
+      ),
+      GetPage(
+          name: '/telaListaComnprov', page: () => ListaComprovantes(),
+          transition: Transition.fade
+      ),
+      GetPage(
+          name: '/telaVisuImg', page: () => TelaImagemComp(),
           transition: Transition.fade
       ),
 
@@ -131,10 +142,11 @@ void main() {
       }
     },
     theme: ThemeData(
-      primarySwatch: Colors.grey,
+      primarySwatch: Colors.blue,
       primaryColor: Colors.lightBlueAccent,
-      buttonColor: Colors.grey,
+      buttonColor: Colors.deepPurpleAccent,
       scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(color:Colors.blue )
       //canvasColor: Colors.yellow,
     ),
     localizationsDelegates: [

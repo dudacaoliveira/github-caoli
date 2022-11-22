@@ -49,7 +49,7 @@ class _MenuState extends State<Menu> {
 
   void chamaWhatsapp ({@required number, @required massage})async{
       String url = 'whatsapp://send?phone=$number&text = $massage';
-      await canLaunch(url) ? launch(url): print("Erro ao tentar abrie Whatsapp");
+      await canLaunch(url) ? launch(url): print("Erro ao tentar abrir Whatsapp");
   }
 
   @override
@@ -164,18 +164,18 @@ class _MenuState extends State<Menu> {
   Widget layoutCard(){
     return Column(
       children: [
-        GestureDetector(
+       /* GestureDetector(
           child: MyCardMenu("Configurações",Icon(Icons.settings),Colors.blueGrey),
           onTap: (){
             Navigator.push(context, MaterialPageRoute(
                 builder: (context) => TelaConfig()
             ));
           },
-        ),
+        ),*/
         GestureDetector(
           child: MyCardMenu("Histórico de Despesas",Icon(Icons.assignment),Colors.blueGrey),
           onTap: (){
-            Get.toNamed("/despRecu?device=phone&visualizada=nao&id=${_id}&nome=${_nome}");
+            Get.toNamed("/despRecu?device=phone&visualizada=nao&id=${_id}");
             //Navigator.pop(context);
           },
         ),
@@ -183,20 +183,20 @@ class _MenuState extends State<Menu> {
           child: MyCardMenu("Vistoria",Icon(Icons.assistant_photo),Colors.blueGrey),
           onTap: (){
             //Get.snackbar("Em breve!", "Em construção!",backgroundColor: Colors.white);
-            Get.toNamed("/telavistoria2");
+            Get.toNamed("/telavistoria");
             //Navigator.pop(context);
           },
         ),
         GestureDetector(
           child: MyCardMenu("Fale com o desenvolvedor", Icon(Icons.message,color: Colors.teal,),Colors.teal),
           onTap: ()async{
-            chamaWhatsapp(number:'+5551992603380', massage: "Hello!");
+            chamaWhatsapp(number:'+5551992603380', massage: "Olá!");
           },
         ),
         GestureDetector(
           child: MyCardMenu("Comprovantes Recep.....", Icon(Icons.note,color: Colors.black54,),Colors.black54),
           onTap: ()async{
-            Get.toNamed("/telaComprovantes");
+            Get.toNamed("/telaComprovantes?device=phone&visualizada=nao&id=${_id}&nome=${_nome}");
           },
         ),
         GestureDetector(

@@ -12,7 +12,7 @@ import 'dart:async';
 import 'dart:io';
 import 'ConexaoBd.dart';
 import 'Criptografia.dart';
-import 'Index.dart';
+import 'IndexOLD.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Controller extends GetxController{
@@ -22,6 +22,7 @@ class Controller extends GetxController{
   String id_Usuario = "";
   var usuarioController = 'Duda'.obs;
   static Controller get to => Get.find();
+
 }
 
 _showSnackbar(){
@@ -68,6 +69,17 @@ class _TelaLoginNovaState extends State<TelaLoginNova> {
   String msg_servidor = "";
   String _status_servidor = "";
   String _logado = "";
+  bool passwordVisible = false;
+
+  void funcao(){
+    print(c._textEditingController_senha.text);
+    if(c._textEditingController_senha.text == '123456'){
+      Get.snackbar("ok", "Senha correta!");
+      Get.offAll(Index());
+    }else{
+      Get.snackbar("Errou", "Senha incorreta!");
+    }
+  }
   //------------------------Response--------------------------------------------
 
   EnviaParametro(String _corpo_json) async {
@@ -123,7 +135,8 @@ class _TelaLoginNovaState extends State<TelaLoginNova> {
       String c = retorno["status"].toString();
       String b = retorno["msg"];
       String id = retorno["idUsuario"];
-      print("|||||||||||||||||||||||||||||||| ${c} , ${b}, ${id}");
+      String vist = retorno["vistoria_permissao"];
+      print("|||||||||||||||||||||||||||||||| ${c} , ${b}, ${id} vistoria permissão = ${vist}");
       _status_servidor = c;
       id_Logar = id;
       Controller.to.id_Usuario = id;
@@ -137,7 +150,7 @@ class _TelaLoginNovaState extends State<TelaLoginNova> {
       Database dbL = await conL.recuperarBanco();// objeto "con" abre a conexão
       conL.salvarUsuario(id_Logar,c._textEditingController_usuario.text, "sim", dbL);// se Logar grava no banco o usuário logado
       //c.usuarioController = c._textEditingController_usuario.text as RxString;
-
+      FocusScope.of(context).unfocus();
       Get.offAllNamed("/index?device=phone&id=${id_Logar}&nome="+"${c._textEditingController_usuario.text}");
       c._textEditingController_usuario.clear();
       c._textEditingController_senha.clear();
@@ -270,12 +283,29 @@ class _TelaLoginNovaState extends State<TelaLoginNova> {
 
                           child: TextField(
                             focusNode: focus,
-                            obscureText: true,
+                            obscureText: !passwordVisible,
                             controller: c._textEditingController_senha,
                             autofocus: true,
-                            decoration: InputDecoration.collapsed(
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  // Muda o ícone de acor do com o valor boleano da variável passwordVisible
+                                  passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
+                              ),
                               hintText: ("Senha"),
+
                             ),
+                            onTap: (){
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                              //funcao();
+                            },
+
                           ),
                         ),
                         GestureDetector(

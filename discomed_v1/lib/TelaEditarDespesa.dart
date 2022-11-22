@@ -20,7 +20,7 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'Criptografia.dart';
-import 'Index.dart';
+import 'IndexOLD.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';

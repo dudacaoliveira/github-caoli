@@ -5,7 +5,7 @@ import 'package:async/async.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'ConexaoBd.dart';
-import 'Index.dart';
+import 'IndexOLD.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

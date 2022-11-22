@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:discomedv1/CidadesModel.dart';
 import 'package:discomedv1/ConexaoBd.dart';
+import 'package:discomedv1/Cores.dart';
 import 'package:discomedv1/TelaCidades.dart';
 import 'package:discomedv1/Urls.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,7 +54,7 @@ class _TelaDespesaState extends State<TelaDespesa> {
   TextEditingController _textEditingControllerTeste = new TextEditingController();
   //var maskTextInputFormatter = MaskTextInputFormatter(mask: "R\$ ###,##", filter: { "#": RegExp(r'[0-9]') });
   //var controller = new MoneyMaskedTextController(precision:2,leftSymbol: 'R\$ ');
-  static TextEditingController _textEditingControllerValor = new MoneyMaskedTextController(precision: 2, leftSymbol: 'R\$ ', decimalSeparator: ',',thousandSeparator: '.');
+  TextEditingController _textEditingControllerValor = new MoneyMaskedTextController(precision: 2, leftSymbol: 'R\$ ', decimalSeparator: ',',thousandSeparator: '.');
   TextEditingController _textEditingControllerKmIni = new TextEditingController();
   TextEditingController _textEditingControllerKmFinal = new TextEditingController();
   TextEditingController _textEditingControllerMultiplicador = new TextEditingController();
@@ -121,6 +124,7 @@ class _TelaDespesaState extends State<TelaDespesa> {
 
   Future<String> _enviaDespesa() async {
     String getVal = _textEditingControllerValor.text;
+    print("***************************** ${getVal}");
     String getObs = _textEditingControllerObs.text;
     String imagem;
     if(_textEditingControllerTipo.text != "km"){
@@ -167,6 +171,7 @@ class _TelaDespesaState extends State<TelaDespesa> {
       print("Mensagem de Status da despesa venciada " + c.toString());
       if (c.toString() == 'true') {
         //CircularProgressIndicator(value: 20,);
+       // _textEditingControllerValor.clear();
          await _showModalBottomSheetDespEnv();
         _imprimeDadosEnviados();
       } else {
@@ -351,6 +356,8 @@ class _TelaDespesaState extends State<TelaDespesa> {
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
                           limpaCampos();
+                          /*Get.offAllNamed(
+                              "/despesa?device=phone&id=${_id_Usuario} &nome=${_nome_Usuario}");*/
                           Navigator.pop(context);
                         },
                       ),
@@ -453,7 +460,7 @@ class _TelaDespesaState extends State<TelaDespesa> {
   }
 
   _showEnviando(){
-    Get.snackbar("", "ENVIANDO...!",
+    Get.snackbar("Aguarde!", "ENVIANDO...!",
     colorText: Colors.white,
         snackPosition: SnackPosition.BOTTOM,
         isDismissible: true,
@@ -462,7 +469,7 @@ class _TelaDespesaState extends State<TelaDespesa> {
         progressIndicatorBackgroundColor: Colors.greenAccent,
         backgroundColor: Colors.black,
         overlayColor: Colors.orange,
-        duration: Duration(milliseconds: 3000)
+        duration: Duration(milliseconds: 5000)
     );
   }
 
@@ -741,13 +748,17 @@ bool verificaKmini(int ini,int fina){
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.blue,),
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
           //onPressed: ()=> Get.toNamed("/index?device=phone&nome=${_nome_Usuario}&id=${_id_Usuario}"),
-          onPressed: ()=> Navigator.pop(context)
+          //onPressed: ()=> Navigator.pop(context),
+          onPressed: (){
+            FocusScope.of(context).unfocus();
+            Navigator.pop(context);
+          }
         ),
-        elevation: 1,
-        backgroundColor: Colors.white,
-        title: Text("Cadastrar despesa",style: TextStyle(color: Colors.blue),),
+        //elevation: 1,
+        //backgroundColor: Colors.white,
+        title: Text("Cadastrar despesa",style: TextStyle(color: corFontAppBar),),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -1220,7 +1231,7 @@ bool verificaKmini(int ini,int fina){
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
+        //backgroundColor: Colors.green,
         onPressed: () {
           //verificaKmini(int.parse(_textEditingControllerKmIni.text), int.parse(_textEditingControllerKmFinal.text));
           if(_textEditingControllerTipo.text == "Km"){
@@ -1245,6 +1256,7 @@ bool verificaKmini(int ini,int fina){
                   overlayColor: Colors.orange,
                   duration: Duration(milliseconds: 3000)
               );*/
+              _showEnviando();
               validador();
             }
           }

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:discomedv1/Index.dart';
+import 'package:discomedv1/IndexOLD.dart';
 import 'package:discomedv1/TelaDetalhesKmRodado.dart';
 import 'package:discomedv1/Urls.dart';
 import 'package:encrypt/encrypt.dart' as enc;
@@ -159,7 +159,7 @@ class _TelaHistoricoKmState extends State<TelaHistoricoKm> {
   }
 
   Future<File> _saveData() async {
-    print("Entrou no savData");
+    print("Entrou no saveData");
     String data = json.encode(
         _tarefas); // pega a lista _todoList converte em um json e armazena na String para gravar no arquivo
     final file =
@@ -352,6 +352,7 @@ class _TelaHistoricoKmState extends State<TelaHistoricoKm> {
                           .removeCurrentSnackBar(); //para remover o sback quando outro for chamado! Eliminando a pilha!
                       Scaffold.of(context).showSnackBar(snack);//Chama o snack!
                     });
+                    Navigator.pop(context);
                   }else{
                     Get.toNamed("/index?device=phone&id=${_id} &nome=${_nome}");
                   }
@@ -396,7 +397,7 @@ class _TelaHistoricoKmState extends State<TelaHistoricoKm> {
           //filteredUsers.add(Cidades.fromMap(note));
           i++;
         }
-        print("Tamanhanho da lista Items  ${items.length}");
+        print("Tamanho da lista Items  ${items.length}");
         print("Print Print Print Print Print Print Print Print Print Print ");
 
       });

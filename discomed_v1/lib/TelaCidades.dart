@@ -1,4 +1,5 @@
 import 'package:discomedv1/ConexaoBd.dart';
+import 'package:discomedv1/Cores.dart';
 import 'package:discomedv1/TelaDespesa.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,14 +81,14 @@ class _TelaCidadesState extends State<TelaCidades> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.blue,),
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: corFontAppBar,),
           onPressed: (){Navigator.pop(context);}
         ),
-        elevation: 1,
-        backgroundColor: Colors.white,
+        //elevation: 1,
+        //backgroundColor: Colors.white,
         title: Text(widget.text,
         style: TextStyle(
-          color: Colors.blue
+          color: corFontAppBar
         ),
         ),
         actions: <Widget>[

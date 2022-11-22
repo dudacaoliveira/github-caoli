@@ -12,6 +12,7 @@ import 'dart:async';
 import 'CidadesModel.dart';
 import 'DespesaModel.dart';
 import 'TelaLoginNova.dart';
+import 'Cores.dart';
 
 
 class TelaDespRecusada extends StatefulWidget {
@@ -393,7 +394,7 @@ class _TelaDespRecusadaState extends State<TelaDespRecusada> {
                       Navigator.pop(context);
                     },),
                     //Text(dataText),
-                    FlatButton(child: Text("Ok",style:TextStyle(color: Colors.green),),onPressed: (){
+                    FlatButton(child: Text("Ok",style:TextStyle(color: Colors.green),),onPressed: ()async{
                       setState(() {
                         final datapt = DateFormat(DateFormat.YEAR_MONTH_DAY, "pt_Br").format(_dateTimeFinal);
                         _vardataPT_Final = datapt; // aqui a vardata recebe a data formatada pelo código acima
@@ -401,6 +402,17 @@ class _TelaDespRecusadaState extends State<TelaDespRecusada> {
                         txtDataFinal = _vardataPT_Final;
                       });
                       Navigator.pop(context);
+                      if( _dateTimeFinal == null || _dateTimeIni == null){
+                        Get.snackbar("", "Favor escolher Data inicial e Final!",colorText: Colors.red ,snackPosition: SnackPosition.TOP,backgroundColor: Colors.white,isDismissible: true,
+                          dismissDirection: SnackDismissDirection.HORIZONTAL,
+                          showProgressIndicator: true,);
+                      }else{
+                        await _carregaDespRecu();
+                        print("------------------- ${items.length}");
+                        print("--------Inicial------------${_dateTimeIni}");
+                        print("--------Final------------${_dateTimeFinal}");
+                        print("Else Carrega despesas TelaDespRecusada");
+                      }
                     },
                     ),
                   ],
@@ -775,9 +787,9 @@ class _TelaDespRecusadaState extends State<TelaDespRecusada> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200], // cor do fundo bodycar
+      backgroundColor: corBckgScaffold, // cor do fundo bodycar
         appBar: AppBar(
-          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.blue,),
+          leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
             //onPressed: ()=> Get.toNamed("/index?device=phone&nome=${_nome}&id=${_id}"),
             onPressed: (){
                //Get.toNamed("/index?device=phone&nome=${_nome}&id=${_id}");
@@ -786,10 +798,10 @@ class _TelaDespRecusadaState extends State<TelaDespRecusada> {
               print(_dateTimeIni.toString() + _dateTimeFinal.toString());
             },
           ),
-          backgroundColor: Colors.white,
-          elevation: 1,
+          //backgroundColor: Colors.white,
+          //elevation: 1,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.search,color: Colors.blue,),
+            IconButton(icon: Icon(Icons.search,color: Colors.white,),
                 onPressed: ()async{
 
               if( _dateTimeFinal == null || _dateTimeIni == null){
@@ -806,7 +818,7 @@ class _TelaDespRecusadaState extends State<TelaDespRecusada> {
             }
             )
           ],
-          title: Text("Listar Despesas",style: TextStyle(color: Colors.blue),),
+          title: Text("Listar Despesas",style: TextStyle(color: corFontAppBar),),
         ),
         body:
 
